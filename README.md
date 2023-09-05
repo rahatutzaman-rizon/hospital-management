@@ -1,0 +1,3 @@
+# hospital-management
+email:redwan@gmail.com
+password:12345
