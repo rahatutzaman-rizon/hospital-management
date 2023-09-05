@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+    
+
+{% block content %}
+    <div style="margin-top:150px;">
+        
+    <div class="doctor-list" style="margin-top:150px; text-align:center;">
+        <h4  style="text-align:center;">Dr. {{user.first_name}} , Your Patient's List:</h4> <br>
+
+        <div class="w-100 text-center">
+            <form action="search" method="get">
+                {% csrf_token %}
+                {{search_form}}
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+              
+        </div>
+
+        <table class="table table-hover p-5" style="padding:20px;text-align:center;">
+            <thead>
+              <tr>
+                <th scope="col">Patient Name</th>
+                <th scope="col">Age</th>
+                <th scope="col">Contact</th>
+                <th scope="col">Diesease Syndrome</th>
+                <th scope="col">Date</th>
+                <th scope="col">Time</th>
+                <th scope="col">New/Old Patient</th> 
+                <th scope="col">Edit/Delete</th> 
+              </tr>
+            </thead>
+            <tbody>
+              {% for appointment in appointments %}
+              
+              <tr>
+                <th scope="row">{{appointment.patient_name}}</th>
+                <th scope="row">{{appointment.patient_age}}</th>
+                <th scope="row">{{appointment.patient_contact}}</th>
+                <td>{{appointment.disease_syndrome}}</td>
+                <td>{{appointment.date}}</td>
+                <td>{{appointment.time}}</td>
+                
+                  {% if appointment.is_new %}
+                  <td class="text-success">New</td>
+                  {% else %}
+                  <td class="text-danger">Old</td>
+                  {% endif %}
+
+                <td>
+                    <a href="{% url 'edit_appointment' appointment.id %}" class="btn btn-primary">Edit</a>
+                    <a href="{% url 'delete_appointment' appointment.id %}" class="btn btn-danger">Delete</a>
+                </td>
+                
+              </tr>
+              
+              {% endfor %}
+            </tbody>
+          </table>
+    </div>
+    </div>
+{% endblock %}

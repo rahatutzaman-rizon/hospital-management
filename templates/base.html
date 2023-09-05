@@ -1,0 +1,107 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <title>Health_Ensure  Hospital Management</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/templatemo-space-dynamic.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/animated.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/owl.css' %}">
+
+  </head>
+
+<body>
+
+  <!-- ***** Preloader Start ***** -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Preloader End ***** -->
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky wow slideInDown bg-success-subtle d-flex">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <nav class="main-nav">
+            <!-- ***** Logo Start ***** -->
+            <a href="{% url 'home' %}" class="logo">
+            
+            </a>
+            <!-- ***** Logo End ***** -->
+            <!-- ***** Menu Start ***** -->
+            <ul class="nav">
+              <li class="scroll-to-section"><a href="{% url 'home' %}" class="active">Health-Ensure</a></li>
+
+              <li class="scroll-to-section"><a href="{% url 'doctors' %}">Doctors</a></li>
+              <li class="scroll-to-section"><a href="{% url 'patients' %}">Patients</a></li> 
+              <li class="scroll-to-section"><a href="{% url 'appointments' %}">appointments</a></li> 
+
+              {% if not user.is_authenticated %}
+              <li class="scroll-to-section"><a href="{% url 'login' %}">Login</a></li>
+              <li class="scroll-to-section"><a href="{% url 'register' %}">Regester</a></li>
+              {% else %}
+              <li class="scroll-to-section"><a href="{% url 'dashboard' %}">Admin</a></li> 
+              <li class="scroll-to-section"><a href="{% url 'logout' %}">Logout</a></li> 
+              <li class="scroll-to-section"><div class="main-red-button"><a>{{request.user.first_name}}</a></div></li> 
+              {% endif %}
+
+              
+            </ul>        
+            <a class='menu-trigger'>
+                <span>Menu</span>
+            </a>
+            <!-- ***** Menu End ***** -->
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+  {% block content %}
+
+  {% endblock %}
+
+
+  <footer>
+    <div class="container bg-info d-flex justify-content-center mt-16 pt-16">
+      <div class="row">
+      
+          <p>Location : Mirpur 10/road:2,<br>dhaka,bangladesh<br>@redwan tamim</p>
+        
+        </div>
+    </div>
+  </footer>
+  <!-- Scripts -->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/js/owl-carousel.js' %}"></script>
+  <script src="{% static 'assets/js/animation.js' %}"></script>
+  <script src="{% static 'assets/js/imagesloaded.js' %}"></script>
+  <script src="{% static 'assets/js/templatemo-custom.js' %}"></script>
+
+</body>
+</html>

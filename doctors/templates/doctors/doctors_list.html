@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    
+    {% if not is_doctor %}
+    <div class="mx-auto" style="margin-top:150px;width:50%; text-align:center;">
+        <div class="card">
+            If you're a doctor, please <a href="{% url 'login' %}">login</a> to your account. Then create a <a href="{% url 'doctor_register' %}">doctor profile</a> as a doctor.
+        </div>
+
+    </div>
+    {% endif %}
+
+    <div class="doctor-list" style="margin-top:150px; text-align:center;">
+        <h4  style="text-align:center;">Doctor's List:</h4> <br>
+
+        <div class="w-100 text-center">
+          <form action="search" method="get">
+              {% csrf_token %}
+              {{search_form}}
+              <button type="submit" class="btn btn-primary">Search</button>
+          </form>
+            
+      </div>
+<table class="table table-hover p-5" style="padding:20px;text-align:center;">
+  <thead>
+    <tr>
+      <th scope="col">Doctor ID</th>
+      <th scope="col">Full Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Designation</th>
+      <th scope="col">Speciality</th>
+      <th scope="col">Experience</th>
+      <th scope="col">Availability</th>
+      <th scope="col">See Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for doctor in doctors %}
+    
+    <tr>
+      <th scope="row">{{doctor.doctor_id}}</th>
+      <td>{{doctor.account.first_name}} {{doctor.account.last_name}}</td>
+      <td>{{doctor.account.email}}</td>
+      <td>{{doctor.designation}}</td>
+      <td>{{doctor.speciality}}</td>
+      <td>{{doctor.experience}}</td>
+      <td>{{doctor.appointment_available_days}}</td>
+      <td><a href="{% url 'doctor_details' doctor.doctor_id %}" class="btn btn-danger">View</a></td>
+    </tr>
+    
+    {% endfor %}
+  </tbody>
+</table>
+    </div>
+{% endblock %}

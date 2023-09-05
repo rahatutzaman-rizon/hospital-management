@@ -1,0 +1,28 @@
+{% extends "base.html" %} {% block content %}
+<div class="container" style="margin-top:150px;margin-left:80px; align-items:center">
+  <div class="row">
+    <h1>Doctor Details</h1>
+    <img src="{{doctor.account.profile.profile_picture.url}}" alt="{{doctor.doctor_id}}" style="width:200px; border-radius:50%; text-align:center"> <br>
+    <br>
+    <p><strong>Doctor ID:</strong> {{ doctor.doctor_id }}</p>
+    <p>
+      <strong>Doctor Name:</strong> {{ doctor.account.first_name }} {{doctor.account.last_name }}
+    </p>
+    <p><strong>Designation:</strong> {{ doctor.designation }}</p>
+    <p><strong>Speciality:</strong> {{ doctor.speciality }}</p>
+    <p><strong>Experience:</strong> {{ doctor.experience }}</p>
+    <p>
+      <strong>Appointment Availability:</strong> {{doctor.get_appointment_available_days_display }}
+    </p>
+    <!-- Add more doctor details here as needed -->
+
+    <!-- Example: Display a list of patients associated with this doctor -->
+    <h2>Patients Associated with {{ doctor.account.first_name }}:</h2>
+    <ul>
+      {% for patient in doctor.appointment.all %} 
+      <li>{{ patient.patient_name }} - Age: {{ patient.patient_age }} - Diesease/Syndrome : {{patient.disease_syndrome}}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

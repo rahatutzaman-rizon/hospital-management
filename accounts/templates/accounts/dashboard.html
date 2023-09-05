@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<section class="section-conten padding-y bg">
+
+{% include 'includes/alerts.html' %}
+<div class="container">
+	<div class="row">
+	{% include 'accounts/dashboard_sidebar.html' %}
+	<main class="col-md-9"  style="margin-top:150px">
+		<article class="card">
+		<header class="card-header">
+			<strong class="d-inline-block mr-3">Logged in as:</strong>
+			<span>{{user.user_name}}</span>
+		</header>
+		<div class="card-body">
+			<div class="row">
+
+			<div class="col-md-6">
+				<div class="card" style="text-align:left;">
+					<div class="card-body">
+						<h5 class="card-text">User Profile:</h5> <br>
+						<h6 class="card-text">Full Name: {{user.first_name}} {{user.last_name}}</h6>
+						<p class="card-text">E-mail: {{userprofile.user.email}}</p>
+						<p class="card-text">Address: {{userprofile.address_line_1}}, {{userprofile.city}}, {{userprofile.state}}, {{userprofile.country}}</p>
+					</div> 
+					
+					{% if doctor.account %}								
+					<div class="card" style="text-align:left;">
+						<div class="card-body">
+							<h5 class="card-title">Doctor's Profile:</h5>
+							<p class="card-text">E-mail: {{doctor.account.email}}</p>
+							<p class="card-text">Designation: {{doctor.designation}}</p>
+							<p class="card-text">Speciality: {{doctor.speciality}}</p>
+							<p class="card-text">Experience: {{doctor.experience}}</p>
+							<p class="card-text">Availability: {{doctor.appointment_available_days}}</p>
+						</div> 
+					</div>
+					{% endif %}
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="card" style="text-align:center;">
+					<div class="card-body">
+						{% if userprofile.profile_picture %}
+							<img src="{{userprofile.profile_picture.url}}" alt="User Profile Picture" style="border-radius:50%;width: 150px;">
+						{% endif %}
+						
+						<p class="mb-0">{{user.email}}</p>
+						<p>Phone No.: {{user.phone_number}}</p>
+					</div>
+				</div>
+			</div>
+
+			</div> <!-- row.// -->
+		</div> <!-- card-body .// -->
+
+		</article> <!-- order-group.// -->
+
+		
+
+		
+	</main>
+</div> <!-- row.// -->
+</div>
+
+
+</section>
+
+{% endblock %}
